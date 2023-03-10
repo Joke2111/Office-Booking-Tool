@@ -19,6 +19,8 @@ public class OfficeBookingTool
 		User registeredUser = UsersService.Register();
 		User logedUser = UsersService.Login();
 
+		// Add office to implement
+
 		/*
 		
 		/// OFFICE INFORMATIONS
