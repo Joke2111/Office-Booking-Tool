@@ -36,7 +36,10 @@ public class OfficeTypeReader implements InputReader<String>
 	@Override
 	public String getPrompt()
 	{
-		return "Enter office type: ";
+
+		String officeTypes = String.join(", ", allowedOfficeTypes);
+
+		return "Available office types: " + officeTypes + "\n" + "Enter office type: ";
 	}
 
 }

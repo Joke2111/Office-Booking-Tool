@@ -40,7 +40,7 @@ public class AccessLevelReader implements InputReader<Integer> /// toate T urile
 	@Override
 	public String getPrompt()
 	{
-		return "Enter user access level: ";
+		return "Enter access level (choose a number between 1 and 5): ";
 	}
 
 }

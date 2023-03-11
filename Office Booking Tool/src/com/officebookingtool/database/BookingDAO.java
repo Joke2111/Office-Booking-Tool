@@ -11,7 +11,7 @@ public class BookingDAO
 
 	private static final String INSERT_BOOKING_SQL = "INSERT INTO booking (user_id, office_id, check_in_date, check_out_date) VALUES (?, ?, ?, ?)";
 
-	public static void addBooking(Booking booking)
+	public static boolean addBooking(Booking booking)
 	{/// de modificat pt login si rezolvat exeptionurile
 
 		Connection connection = DatabaseConnector.getConnection();
@@ -28,11 +28,13 @@ public class BookingDAO
 
 			if (rowsInserted > 0)
 			{
-				System.out.println("A new booking was inserted successfully!");
+				return true;
 			}
+			return false;
 		} catch (SQLException e)
 		{
 			System.out.println(e.getMessage());
+			return false;
 		}
 	}
 }

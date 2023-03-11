@@ -58,6 +58,7 @@ public class UserDAO
 			}
 		} catch (SQLException e)
 		{
+			/// Nu ma intereseaza aici ca nu poti ajunge sa faci rezervare daca nu esti logat
 			System.out.println(e.getMessage());
 		}
 		return null;

@@ -12,6 +12,8 @@ public class UsersService
 	{
 		UserView userView = new UserView();
 
+		System.out.println("Please enter your login credentials:");
+
 		String username = userView.getUsername();
 		String password = userView.getPassword();
 		String passwordEncrypted = PasswordEncryption.encrypt(password);
@@ -25,6 +27,7 @@ public class UsersService
 		} else
 		{
 			System.out.println("Login failed");
+			/// restructurat return-ul !!!
 			return Login();
 		}
 	}
@@ -32,6 +35,8 @@ public class UsersService
 	static public User Register()
 	{
 		UserView userView = new UserView();
+
+		System.out.println("Please set your login credentials:");
 
 		String username = userView.getUsername();
 		String password = userView.getPassword();

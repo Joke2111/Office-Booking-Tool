@@ -35,7 +35,9 @@ public class UserTypeReader implements InputReader<String>
 	@Override
 	public String getPrompt()
 	{
-		return "Enter user type: ";
+		String userTypes = String.join(", ", allowedUserTypes);
+
+		return "Available users types: " + userTypes + "\n" + "Enter user type: ";
 	}
 
 }

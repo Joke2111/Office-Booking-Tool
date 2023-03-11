@@ -10,8 +10,8 @@ public class OfficeService
 	{
 		OfficeView officeView = new OfficeView();
 
-		String officeName = officeView.getOfficeName();
 		String officeType = officeView.getOfficeType();
+		String officeName = officeView.getOfficeName();
 
 		Office office = new Office(officeName, officeType);
 
@@ -24,6 +24,7 @@ public class OfficeService
 		} else
 		{
 			System.out.println("Office addition failed");
+			/// restructurat return-ul !!!
 			return AddOffice();
 		}
 	}

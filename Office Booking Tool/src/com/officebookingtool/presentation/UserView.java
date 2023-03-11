@@ -1,10 +1,6 @@
 package com.officebookingtool.presentation;
 
-import com.officebookingtool.readers.AccessLevelReader;
-import com.officebookingtool.readers.ConsoleReader;
-import com.officebookingtool.readers.PasswordReader;
-import com.officebookingtool.readers.UserTypeReader;
-import com.officebookingtool.readers.UsernameReader;
+import com.officebookingtool.readers.*;
 
 public class UserView
 {

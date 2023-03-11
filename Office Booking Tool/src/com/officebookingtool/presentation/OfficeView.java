@@ -1,8 +1,6 @@
 package com.officebookingtool.presentation;
 
-import com.officebookingtool.readers.ConsoleReader;
-import com.officebookingtool.readers.OfficeNameReader;
-import com.officebookingtool.readers.OfficeTypeReader;
+import com.officebookingtool.readers.*;
 
 public class OfficeView
 {
