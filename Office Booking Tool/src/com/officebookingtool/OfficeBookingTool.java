@@ -7,6 +7,7 @@ import java.time.LocalTime;
 
 import com.officebookingtool.database.*;
 import com.officebookingtool.readers.*;
+import com.officebookingtool.services.OfficeService;
 import com.officebookingtool.services.UsersService;
 
 public class OfficeBookingTool
@@ -18,14 +19,10 @@ public class OfficeBookingTool
 
 		User registeredUser = UsersService.Register();
 		User logedUser = UsersService.Login();
-
-		// Add office to implement
+		Office addedOffice = OfficeService.AddOffice();
 
 		/*
 		
-		/// OFFICE INFORMATIONS
-		String officeType = reader.read(new OfficeTypeReader());
-		String officeName = reader.read(new OfficeNameReader());
 		
 		/// BOOKING INFORMATIONS
 		LocalDateTime date = reader.read(new DateReader());

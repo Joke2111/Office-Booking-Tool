@@ -12,7 +12,7 @@ public class OfficeDAO
 
 	private static final String INSERT_OFFICE_SQL = "INSERT INTO office (name, type) VALUES (?, ?)";
 
-	public static void addOffice(Office office)
+	public static boolean addOffice(Office office)
 	{
 		Connection connection = DatabaseConnector.getConnection();
 		try (PreparedStatement statement = connection.prepareStatement(INSERT_OFFICE_SQL))
@@ -26,11 +26,14 @@ public class OfficeDAO
 
 			if (rowsInserted > 0)
 			{
-				System.out.println("A new office was inserted successfully!");
+				return true;
 			}
+			return false;
+
 		} catch (SQLException e)
 		{
 			System.out.println(e.getMessage());
+			return false;
 		}
 	}
 

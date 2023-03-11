@@ -45,11 +45,11 @@ public class UsersService
 
 		if (isValidRegister)
 		{
-			System.out.println("Register successful");
+			System.out.println("Registration successful");
 			return (user);
 		} else
 		{
-			System.out.println("Register failed");
+			System.out.println("Registration failed");
 			return Register();
 		}
 
