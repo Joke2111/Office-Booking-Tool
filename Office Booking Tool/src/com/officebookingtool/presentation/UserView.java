@@ -15,8 +15,6 @@ public class UserView
 		Integer accessLevel = reader.read(new AccessLevelReader());
 		return accessLevel;
 	}
-	/// return
-	/// recursive
 
 	public String getUsername()
 	{
