@@ -2,8 +2,10 @@ package com.officebookingtool.services;
 
 import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.util.List;
 
 import com.officebookingtool.Booking;
+import com.officebookingtool.BookingValidation;
 import com.officebookingtool.Office;
 import com.officebookingtool.User;
 import com.officebookingtool.database.*;
@@ -26,24 +28,36 @@ public class BookingService
 		LocalDateTime checkInDate = LocalDateTime.of(date.toLocalDate(), checkInHour);
 		LocalDateTime checkOutDate = LocalDateTime.of(date.toLocalDate(), checkOutHour);
 
-		int idOfCurrentUser = UserDAO.findUserId(user);
-		int idOfCurrentOffice = OfficeDAO.findOfficeId(office);
+		List<Booking> existingBookings = BookingDAO.getAllExistingBookings();
 
-		Booking booking = new Booking(idOfCurrentUser, idOfCurrentOffice, checkInDate, checkOutDate);
+		Booking booking;
 
-		// Adding a new user, office, booking to the database
-
-		boolean isBookingAdded = BookingDAO.addBooking(booking);
-
-		if (isBookingAdded)
+		if (BookingValidation.isBookingPossible(checkInDate, checkOutDate, existingBookings))
 		{
-			System.out.println("Booking added successfully");
-			return (booking);
+			System.out.println("Details inserted successfully!");
+
+			int idOfCurrentUser = UserDAO.findUserId(user);
+			int idOfCurrentOffice = OfficeDAO.findOfficeId(office);
+
+			booking = new Booking(idOfCurrentUser, idOfCurrentOffice, checkInDate, checkOutDate);
+
+			boolean isBookingAdded = BookingDAO.addBooking(booking);
+
+			if (isBookingAdded)
+			{
+				System.out.println("Booking added successfully!");
+				return (booking);
+			} else
+			{
+				System.out.println("Booking addition failed");
+				/// restructurat return-ul !!!
+				return AddBooking(user, office);
+			}
+
 		} else
 		{
-			System.out.println("Booking addition failed");
-			/// restructurat return-ul !!!
-			return AddBooking(user, office);
+			System.out.println("Error: Booking overlaps with an existing reservation");
+			return null;
 		}
 
 	}

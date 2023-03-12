@@ -2,9 +2,14 @@ package com.officebookingtool.database;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 import com.officebookingtool.Booking;
+import com.officebookingtool.Office;
 
 public class BookingDAO
 {
@@ -37,4 +42,35 @@ public class BookingDAO
 			return false;
 		}
 	}
+
+	private static final String SELECT_ALL_BOOKINGS_SQL = "SELECT * FROM booking";
+
+	public static List<Booking> getAllExistingBookings()
+	{
+		List<Booking> existingBookings = new ArrayList<>();
+
+		Connection connection = DatabaseConnector.getConnection();
+		try (PreparedStatement statement = connection.prepareStatement(SELECT_ALL_BOOKINGS_SQL))
+		{
+			ResultSet resultSet = statement.executeQuery();
+
+			while (resultSet.next())
+			{
+				int lastInsertedUserId = resultSet.getInt("user_id");
+				int lastInsertedOfficeId = resultSet.getInt("office_id");
+				LocalDateTime checkInDate = resultSet.getTimestamp("check_in_date").toLocalDateTime();
+				LocalDateTime checkOutDate = resultSet.getTimestamp("check_out_date").toLocalDateTime();
+
+				Booking booking = new Booking(lastInsertedUserId, lastInsertedOfficeId, checkInDate, checkOutDate);
+
+				existingBookings.add(booking);
+			}
+		} catch (SQLException e)
+		{
+			e.printStackTrace();
+		}
+
+		return existingBookings;
+	}
+
 }
