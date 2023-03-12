@@ -17,4 +17,10 @@ public class OfficeView
 		String officeName = reader.read(new OfficeNameReader());
 		return officeName;
 	}
+
+	public Integer getOfficeSelected()
+	{
+		Integer officeNumber = reader.read(new OfficeSelectedReader());
+		return officeNumber;
+	}
 }

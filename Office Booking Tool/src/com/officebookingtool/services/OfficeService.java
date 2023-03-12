@@ -1,5 +1,7 @@
 package com.officebookingtool.services;
 
+import java.util.List;
+
 import com.officebookingtool.Office;
 import com.officebookingtool.database.OfficeDAO;
 import com.officebookingtool.presentation.OfficeView;
@@ -28,4 +30,26 @@ public class OfficeService
 			return AddOffice();
 		}
 	}
+
+	static public Office SelectOffice()
+	{
+		System.out.println("Here is a list with our offices (name & type):");
+
+		List<Office> offices = OfficeDAO.getAllOffices();
+
+		int i = 1;
+		for (Office office : offices)
+		{
+			System.out.println(i + ". " + office.getOfficeName() + " - " + office.getOfficeType());
+			i++;
+		}
+
+		OfficeView officeView = new OfficeView();
+		Integer officeNumber = officeView.getOfficeSelected();
+
+		return OfficeDAO.getOfficeById(officeNumber);
+	}
+
+	// nu e added office, o sa fie selected office
+
 }

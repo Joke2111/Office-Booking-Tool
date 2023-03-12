@@ -7,7 +7,7 @@ public class AccessLevelReader implements InputReader<Integer> /// toate T urile
 	@Override
 	public String getErrorMessage()
 	{
-		return "Please enter a number from 1 to 5!";
+		return "Invalid number! Please enter a number from 1 to 5!";
 	}
 
 	@Override
