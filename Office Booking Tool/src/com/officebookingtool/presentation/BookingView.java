@@ -7,21 +7,21 @@ import com.officebookingtool.readers.*;
 
 public class BookingView
 {
-	ConsoleReader reader = new ConsoleReader();
+	private static ConsoleReader reader = new ConsoleReader();
 
-	public LocalDateTime getDate()
+	public static LocalDateTime getDate()
 	{
 		LocalDateTime date = reader.read(new DateReader());
 		return date;
 	}
 
-	public LocalTime getCheckInHour()
+	public static LocalTime getCheckInHour()
 	{
 		LocalTime checkInHour = reader.read(new CheckInHourReader());
 		return checkInHour;
 	}
 
-	public Integer getNumberOfHours()
+	public static Integer getNumberOfHours()
 	{
 		Integer numberOfHours = reader.read(new NumberOfHoursReader());
 		return numberOfHours;

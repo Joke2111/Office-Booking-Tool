@@ -5,6 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDateTime;
+import java.util.AbstractMap.SimpleEntry;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -71,6 +72,37 @@ public class BookingDAO
 		}
 
 		return existingBookings;
+	}
+
+	private static final String GET_BOOKED_INTERVALS_SQL = "SELECT HOUR(check_in_date), HOUR(check_out_date) " + "FROM booking "
+			+ "JOIN office ON booking.office_id = office.id " + "JOIN user ON booking.user_id = user.id " + "WHERE DATE(check_in_date) = ? "
+			+ "AND office.name = ?";
+
+	public static List<SimpleEntry<Integer, Integer>> viewBookings(LocalDateTime date, String officeName)
+	{
+		List<SimpleEntry<Integer, Integer>> bookings = new ArrayList<>();
+
+		Connection connection = DatabaseConnector.getConnection();
+		try (PreparedStatement stmt = connection.prepareStatement(GET_BOOKED_INTERVALS_SQL))
+		{
+
+			stmt.setDate(1, java.sql.Date.valueOf(date.toLocalDate()));
+			stmt.setString(2, officeName);
+
+			ResultSet rs = stmt.executeQuery();
+			while (rs.next())
+			{
+				int checkInDate = rs.getInt(1);
+				int checkOutDate = rs.getInt(2);
+				SimpleEntry<Integer, Integer> interval = new SimpleEntry<>(checkInDate, checkOutDate);
+				bookings.add(interval);
+			}
+		} catch (SQLException e)
+		{
+			System.out.println(e.getMessage());
+			System.out.println("ai intrat pe catch");
+		}
+		return bookings;
 	}
 
 }

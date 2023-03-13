@@ -15,13 +15,18 @@ public class BookingService
 {
 	static public Booking AddBooking(User user, Office office)
 	{
-		BookingView bookingView = new BookingView();
-
 		System.out.println("Please enter your booking details:");
 
-		LocalDateTime date = bookingView.getDate();
-		LocalTime checkInHour = bookingView.getCheckInHour();
-		Integer numberOfHours = bookingView.getNumberOfHours();
+		LocalDateTime date = BookingView.getDate();
+
+		LocalTime checkInHour = BookingView.getCheckInHour();
+		Integer numberOfHours = BookingView.getNumberOfHours();
+
+		if ((checkInHour.getHour() + numberOfHours) > 20)
+		{
+			System.out.println("Our offices can only be booked from 8:00 to 20:00");
+			return null;
+		}
 
 		LocalTime checkOutHour = checkInHour.plusHours(numberOfHours);
 

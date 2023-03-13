@@ -1,19 +1,21 @@
 package com.officebookingtool.services;
 
+import java.time.LocalDateTime;
 import java.util.List;
+import java.util.AbstractMap.SimpleEntry;
 
 import com.officebookingtool.Office;
+import com.officebookingtool.database.BookingDAO;
 import com.officebookingtool.database.OfficeDAO;
+import com.officebookingtool.presentation.BookingView;
 import com.officebookingtool.presentation.OfficeView;
 
 public class OfficeService
 {
 	static public Office AddOffice()
 	{
-		OfficeView officeView = new OfficeView();
-
-		String officeType = officeView.getOfficeType();
-		String officeName = officeView.getOfficeName();
+		String officeType = OfficeView.getOfficeType();
+		String officeName = OfficeView.getOfficeName();
 
 		Office office = new Office(officeName, officeType);
 
@@ -44,12 +46,20 @@ public class OfficeService
 			i++;
 		}
 
-		OfficeView officeView = new OfficeView();
-		Integer officeNumber = officeView.getOfficeSelected();
+		Integer officeNumber = OfficeView.getOfficeSelected();
 
 		return OfficeDAO.getOfficeById(officeNumber);
 	}
 
-	// nu e added office, o sa fie selected office
+	static public void ViewOfficeStatus()
+	{
+		int[] HourArray = new int[12];
+
+		/// implementation of the hour array system
+
+		String officeName = SelectOffice().getOfficeName();
+		LocalDateTime date = BookingView.getDate();
+		List<SimpleEntry<Integer, Integer>> bookings = BookingDAO.viewBookings(date, officeName);
+	}
 
 }
