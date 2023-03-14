@@ -4,10 +4,13 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
 import com.officebookingtool.Office;
+import com.officebookingtool.Reservation;
+import com.officebookingtool.User;
 
 public class OfficeDAO
 {
@@ -140,5 +143,33 @@ public class OfficeDAO
 			/// service
 			return null;
 		}
+	}
+
+	private static final String SELECT_REZERVATIONS_SQL = "SELECT booking.check_in_date, booking.check_out_date, office.name "
+			+ "FROM booking " + "JOIN office ON booking.office_id = office.id " + "JOIN user ON booking.user_id = user.id "
+			+ "WHERE user.username = ?";
+
+	public static List<Reservation> getBookings(User user)
+	{
+		List<Reservation> bookings = new ArrayList<>();
+
+		Connection connection = DatabaseConnector.getConnection();
+		try (PreparedStatement stmt = connection.prepareStatement(SELECT_REZERVATIONS_SQL))
+		{
+			stmt.setString(1, user.getUsername());
+			ResultSet rs = stmt.executeQuery();
+
+			while (rs.next())
+			{
+				LocalDateTime checkInTime = rs.getTimestamp("check_in_date").toLocalDateTime();
+				LocalDateTime checkOutTime = rs.getTimestamp("check_out_date").toLocalDateTime();
+				String officeName = rs.getString("name");
+				bookings.add(new Reservation(checkInTime, checkOutTime, officeName));
+			}
+		} catch (SQLException e)
+		{
+			e.printStackTrace();
+		}
+		return bookings;
 	}
 }
