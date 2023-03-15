@@ -96,7 +96,7 @@ public class OfficeService
 
 	}
 
-	public static void formatBookings(List<Reservation> bookings)
+	public static void ViewFormatedBookings(List<Reservation> bookings)
 	{
 		if (bookings.size() == 0)
 		{
