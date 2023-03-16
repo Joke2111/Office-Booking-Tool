@@ -4,7 +4,22 @@ import com.officebookingtool.User;
 
 public class CommandContext
 {
+
+	private static CommandContext instance;
 	private User loggedInUser;
+
+	private CommandContext()
+	{
+	}
+
+	public static CommandContext getInstance()
+	{
+		if (instance == null)
+		{
+			instance = new CommandContext();
+		}
+		return instance;
+	}
 
 	public User getLoggedInUser()
 	{
@@ -14,11 +29,5 @@ public class CommandContext
 	public void setLoggedInUser(User loggedInUser)
 	{
 		this.loggedInUser = loggedInUser;
-	}
-
-	public Command getCommand(String commandName)
-	{
-		// to be implemented
-		return null;
 	}
 }

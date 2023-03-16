@@ -2,11 +2,11 @@ package com.officebookingtool.commands;
 
 public class CommandExecutor
 {
-	private CommandContext commandContext;
+	private final CommandFactory commandFactory;
 
-	public CommandExecutor()
+	public CommandExecutor(CommandFactory commandFactory)
 	{
-		this.commandContext = new CommandContext();
+		this.commandFactory = commandFactory;
 	}
 
 	public void executeCommand(String input)
@@ -14,13 +14,7 @@ public class CommandExecutor
 		String[] tokens = input.split(" ");
 		String commandName = tokens[0];
 
-		Command command = commandContext.getCommand(commandName);
-		if (command != null)
-		{
-			command.execute(commandContext, tokens);
-		} else
-		{
-			System.out.println("Unknown command: " + commandName);
-		}
+		Command command = commandFactory.getCommand(commandName);
+		command.execute();
 	}
 }

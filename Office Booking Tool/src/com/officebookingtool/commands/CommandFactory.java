@@ -5,17 +5,21 @@ import java.util.Map;
 
 public class CommandFactory
 {
-	public static Map<String, Command> createCommands()
+	private Map<String, Command> commandMap;
+
+	public CommandFactory()
 	{
-		Map<String, Command> commands = new HashMap<>();
+		commandMap = new HashMap<>();
+		commandMap.put("/login", new LoginCommand());
+		commandMap.put("/register", new RegisterCommand());
+		commandMap.put("/addoffice", new AddOfficeCommand());
+		commandMap.put("/makebook", new MakeABooking());
+		commandMap.put("/viewavailablebookings", new ViewAvailableBookingsCommand());
+		commandMap.put("/viewallbookings", new ViewAllBookingsCommand());
+	}
 
-		commands.put("/login", new LoginCommand());
-		commands.put("/register", new RegisterCommand());
-		commands.put("/addoffice", new AddOfficeCommand());
-		commands.put("/makebook", new MakeABooking());
-		commands.put("/viewavailablebookings", new ViewAvailableBookingsCommand());
-		commands.put("/viewallbookings", new ViewAllBookingsCommand());
-
-		return commands;
+	public Command getCommand(String commandName)
+	{
+		return commandMap.get(commandName);
 	}
 }
