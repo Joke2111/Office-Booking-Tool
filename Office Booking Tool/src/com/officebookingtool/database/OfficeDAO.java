@@ -26,7 +26,6 @@ public class OfficeDAO
 			statement.setString(1, office.getOfficeName());
 			statement.setString(2, office.getOfficeType());
 
-			// Execute the prepared statement
 			int rowsInserted = statement.executeUpdate();
 
 			if (rowsInserted > 0)
@@ -139,8 +138,7 @@ public class OfficeDAO
 			}
 		} catch (SQLException e)
 		{
-			/// de ce mai tb sa arat exceptia cand eu dau return si practic o tratez in
-			/// service
+			/// de ce mai tb sa arat exceptia cand eu dau return si practic o tratez in service
 			return null;
 		}
 	}

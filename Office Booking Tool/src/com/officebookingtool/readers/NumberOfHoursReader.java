@@ -20,8 +20,8 @@ public class NumberOfHoursReader implements InputReader<Integer>
 	{
 		try
 		{
-			int value = Integer.parseInt(input); // Parse the input String to an int value
-			return value >= 1 && value <= 12; // Check if the parsed value is between 1 and 5 (inclusive)
+			int value = Integer.parseInt(input);
+			return value >= 1 && value <= 12;
 		} catch (NumberFormatException e)
 		{
 			// If the input string cannot be parsed as an integer, return false

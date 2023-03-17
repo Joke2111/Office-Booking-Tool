@@ -11,11 +11,12 @@ public class CommandFactory
 	{
 		commandMap = new HashMap<>();
 		commandMap.put("/login", new LoginCommand());
+		commandMap.put("/commands", new ViewCommandsCommand());
 		commandMap.put("/register", new RegisterCommand());
 		commandMap.put("/addoffice", new AddOfficeCommand());
 		commandMap.put("/makebook", new MakeABooking());
-		commandMap.put("/viewavailablebookings", new ViewAvailableBookingsCommand());
-		commandMap.put("/viewallbookings", new ViewAllBookingsCommand());
+		commandMap.put("/officestatus", new ViewOfficeStatusCommand());
+		commandMap.put("/mybookings", new ViewMyBookingsCommand());
 	}
 
 	public Command getCommand(String commandName)

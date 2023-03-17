@@ -2,32 +2,37 @@ package com.officebookingtool;
 
 import java.sql.Connection;
 import java.sql.SQLException;
-import java.time.LocalDateTime;
 import java.util.Scanner;
 
 import com.officebookingtool.commands.CommandExecutor;
+import com.officebookingtool.commands.CommandFactory;
 import com.officebookingtool.database.*;
-import com.officebookingtool.presentation.BookingView;
-import com.officebookingtool.presentation.OfficeView;
-import com.officebookingtool.services.*;
 
+/**
+ * The OfficeBookingTool class is responsible for running the Office Booking Tool application. It provides the main method to start the application,
+ * which includes setting up the CommandExecutor and listening to user input from the command line. When the user exits the application, it closes the
+ * database connection.
+ */
 public class OfficeBookingTool
 {
-	public static void main(String[] args)
+	private static void runApp()
 	{
-
 		System.out.println("Welcome to the Office Booking Tool!\n"
 				+ "To access the booking system, please log in or register. You can type /commands for details on available commands.");
 
-		CommandExecutor executor = new CommandExecutor();
+		CommandExecutor executor = new CommandExecutor(new CommandFactory());
+
 		Scanner scanner = new Scanner(System.in);
 
 		while (true)
 		{
+			System.out.print("\n> ");
 			String input = scanner.nextLine();
+			System.out.println();
 
 			if (input.equals("/exit"))
 			{
+				System.out.println("Thank you for using our application!\n");
 				break;
 			}
 
@@ -35,17 +40,12 @@ public class OfficeBookingTool
 		}
 
 		scanner.close();
+	}
 
-		// User registeredUser = UsersService.Register();
-		// User logedUser = UsersService.Login();
+	public static void main(String[] args)
+	{
 
-		// Office selectedOffice = OfficeService.SelectOffice();
-		// Booking addedBooking = BookingService.AddBooking(logedUser, selectedOffice);
-
-		// Office addedOffice = OfficeService.AddOffice();
-
-		// OfficeService.ViewFormatedBookings(OfficeDAO.getBookings(logedUser));
-		// OfficeService.ViewOfficeStatus();
+		runApp();
 
 		Connection connection = DatabaseConnector.getConnection();
 		try

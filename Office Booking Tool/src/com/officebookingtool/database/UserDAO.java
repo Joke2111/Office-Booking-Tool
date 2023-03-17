@@ -9,7 +9,6 @@ import com.officebookingtool.User;
 
 public class UserDAO
 {
-	// private static final String SELECT_ALL_SQL = "SELECT * FROM user";
 	private static final String INSERT_USER_SQL = "INSERT INTO user (username, access_level, type, password) VALUES (?, ?, ?, ?)";
 
 	public static boolean addUser(User user)
@@ -22,7 +21,6 @@ public class UserDAO
 			statement.setString(3, user.getUserType());
 			statement.setString(4, user.getPasswordEncrypted());
 
-			// Execute the prepared statement
 			int rowsInserted = statement.executeUpdate();
 
 			if (rowsInserted > 0)
@@ -87,8 +85,7 @@ public class UserDAO
 			}
 		} catch (SQLException e)
 		{
-			/// de ce mai tb sa arat exceptia cand eu dau return si practic o tratez in
-			/// service
+			/// de ce mai tb sa arat exceptia cand eu dau return si practic o tratez in service
 			return null;
 		}
 	}

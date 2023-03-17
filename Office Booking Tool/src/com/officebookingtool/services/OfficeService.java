@@ -36,24 +36,6 @@ public class OfficeService
 		}
 	}
 
-	static public Office SelectOffice()
-	{
-		System.out.println("Here is a list with our offices (name & type):");
-
-		List<Office> offices = OfficeDAO.getAllOffices();
-
-		int i = 1;
-		for (Office office : offices)
-		{
-			System.out.println(i + ". " + office.getOfficeName() + " - " + office.getOfficeType());
-			i++;
-		}
-
-		Integer officeNumber = OfficeView.getOfficeSelected();
-
-		return OfficeDAO.getOfficeById(officeNumber);
-	}
-
 	public static void displayAvailableTimeIntervals(List<SimpleEntry<Integer, Integer>> bookings)
 	{
 		boolean[] myArray = new boolean[12];
@@ -88,7 +70,7 @@ public class OfficeService
 
 	static public void ViewOfficeStatus()
 	{
-		String officeName = SelectOffice().getOfficeName();
+		String officeName = BookingService.SelectOffice().getOfficeName();
 		LocalDateTime date = BookingView.getDate();
 		List<SimpleEntry<Integer, Integer>> bookings = BookingDAO.viewBookings(date, officeName);
 

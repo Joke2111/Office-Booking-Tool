@@ -1,9 +1,9 @@
 package com.officebookingtool.commands;
 
 import com.officebookingtool.User;
-import com.officebookingtool.services.UsersService;
+import com.officebookingtool.services.OfficeService;
 
-public class RegisterCommand implements Command
+public class ViewOfficeStatusCommand implements Command
 {
 
 	@Override
@@ -13,11 +13,10 @@ public class RegisterCommand implements Command
 		User loggedInUser = context.getLoggedInUser();
 		if (loggedInUser == null)
 		{
-			context.setLoggedInUser(UsersService.Register());
+			System.out.println("You have to be loged in to have acces to this command");
 		} else
 		{
-			System.out.println("You are already loged!");
+			OfficeService.ViewOfficeStatus();
 		}
 	}
-
 }

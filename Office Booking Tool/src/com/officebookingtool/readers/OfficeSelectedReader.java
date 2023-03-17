@@ -47,7 +47,7 @@ public class OfficeSelectedReader implements InputReader<Integer>
 	@Override
 	public String getPrompt()
 	{
-		return "Please enter the number of the office you would like to book:";
+		return "Please enter the office number you are interested in: ";
 	}
 
 }

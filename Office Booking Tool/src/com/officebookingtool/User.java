@@ -1,5 +1,10 @@
 package com.officebookingtool;
 
+/**
+ * The User class represents a user of the system.
+ * 
+ * This class contains methods for getting and setting the user properties, including the username, access level, user type, and encrypted password.
+ */
 public class User
 {
 	private String username;

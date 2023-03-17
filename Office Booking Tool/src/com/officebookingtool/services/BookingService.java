@@ -10,12 +10,16 @@ import com.officebookingtool.Office;
 import com.officebookingtool.User;
 import com.officebookingtool.database.*;
 import com.officebookingtool.presentation.BookingView;
+import com.officebookingtool.presentation.OfficeView;
 
 public class BookingService
 {
-	static public Booking AddBooking(User user, Office office)
+
+	static public Booking AddBooking(User user)
 	{
 		System.out.println("Please enter your booking details:");
+
+		Office office = SelectOffice();
 
 		LocalDateTime date = BookingView.getDate();
 
@@ -56,7 +60,7 @@ public class BookingService
 			{
 				System.out.println("Booking addition failed");
 				/// restructurat return-ul !!!
-				return AddBooking(user, office);
+				return AddBooking(user);
 			}
 
 		} else
@@ -65,5 +69,25 @@ public class BookingService
 			return null;
 		}
 
+	}
+
+	static public Office SelectOffice()
+	{
+		System.out.println("Here is a list with our offices (name & type):");
+
+		List<Office> offices = OfficeDAO.getAllOffices();
+
+		int i = 1;
+		for (Office office : offices)
+		{
+			System.out.println(i + ". " + office.getOfficeName() + " - " + office.getOfficeType());
+			i++;
+		}
+
+		System.out.println();
+
+		Integer officeNumber = OfficeView.getOfficeSelected();
+
+		return OfficeDAO.getOfficeById(officeNumber);
 	}
 }

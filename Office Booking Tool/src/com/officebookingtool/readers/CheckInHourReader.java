@@ -9,7 +9,7 @@ public class CheckInHourReader implements InputReader<LocalTime>
 	@Override
 	public LocalTime getValue(String input)
 	{
-		LocalTime time = LocalTime.parse(input); // parse the input string to a LocalTime object
+		LocalTime time = LocalTime.parse(input);
 		return time;
 	}
 
@@ -24,16 +24,16 @@ public class CheckInHourReader implements InputReader<LocalTime>
 	{
 		try
 		{
-			LocalTime time = LocalTime.parse(input); // parse the input string to a LocalTime object
-			int hour = time.getHour(); // get the hour from the LocalTime object
-			int minute = time.getMinute(); // get the hour from the LocalTime object
+			LocalTime time = LocalTime.parse(input);
+			int hour = time.getHour();
+			int minute = time.getMinute();
 			if (hour < 8 || hour > 19 || minute != 0)
-			{ // check if the hour is outside the range of 8 to 19
+			{
 				return false;
 			}
 			return true;
 		} catch (DateTimeParseException e)
-		{ // catch an exception if the input is not in the expected format
+		{
 			return false;
 		}
 	}

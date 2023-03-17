@@ -1,9 +1,10 @@
 package com.officebookingtool.commands;
 
 import com.officebookingtool.User;
-import com.officebookingtool.services.BookingService;
+import com.officebookingtool.database.OfficeDAO;
+import com.officebookingtool.services.OfficeService;
 
-public class MakeABooking implements Command
+public class ViewMyBookingsCommand implements Command
 {
 
 	@Override
@@ -16,9 +17,8 @@ public class MakeABooking implements Command
 			System.out.println("You have to be loged in to have acces to this command");
 		} else
 		{
-			BookingService.AddBooking(loggedInUser);
+			OfficeService.ViewFormatedBookings(OfficeDAO.getBookings(loggedInUser));
 		}
-
 	}
 
 }

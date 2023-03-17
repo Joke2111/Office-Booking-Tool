@@ -10,7 +10,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.officebookingtool.Booking;
-import com.officebookingtool.Office;
 
 public class BookingDAO
 {
@@ -18,7 +17,7 @@ public class BookingDAO
 	private static final String INSERT_BOOKING_SQL = "INSERT INTO booking (user_id, office_id, check_in_date, check_out_date) VALUES (?, ?, ?, ?)";
 
 	public static boolean addBooking(Booking booking)
-	{/// de modificat pt login si rezolvat exeptionurile
+	{
 
 		Connection connection = DatabaseConnector.getConnection();
 		try (PreparedStatement statement = connection.prepareStatement(INSERT_BOOKING_SQL))

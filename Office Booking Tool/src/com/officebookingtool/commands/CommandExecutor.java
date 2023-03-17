@@ -12,9 +12,23 @@ public class CommandExecutor
 	public void executeCommand(String input)
 	{
 		String[] tokens = input.split(" ");
+
+		if (tokens.length != 1)
+		{
+			System.out.println("Unknown command");
+			return;
+		}
+
 		String commandName = tokens[0];
 
 		Command command = commandFactory.getCommand(commandName);
-		command.execute();
+
+		if (command == null)
+		{
+			System.out.println("Unknown command");
+		} else
+		{
+			command.execute();
+		}
 	}
 }

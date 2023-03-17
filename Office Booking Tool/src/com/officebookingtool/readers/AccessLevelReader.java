@@ -1,7 +1,6 @@
 package com.officebookingtool.readers;
 
-public class AccessLevelReader implements InputReader<Integer> /// toate T urile o sa fie inlocuite cu tipul lui
-																/// InputReader, adica in acest caz Integer
+public class AccessLevelReader implements InputReader<Integer>
 {
 
 	@Override
@@ -15,11 +14,10 @@ public class AccessLevelReader implements InputReader<Integer> /// toate T urile
 	{
 		try
 		{
-			int value = Integer.parseInt(input); // Parse the input String to an int value
-			return value >= 1 && value <= 5; // Check if the parsed value is between 1 and 5 (inclusive)
+			int value = Integer.parseInt(input);
+			return value >= 1 && value <= 5;
 		} catch (NumberFormatException e)
 		{
-			// If the input string cannot be parsed as an integer, return false
 			return false;
 		}
 	}
@@ -33,7 +31,6 @@ public class AccessLevelReader implements InputReader<Integer> /// toate T urile
 	@Override
 	public Integer getValue(String input)
 	{
-		/// transform din string in int (dar nu numai)
 		return Integer.parseInt(input);
 	}
 

@@ -12,7 +12,7 @@ public class UsersService
 	{
 		UserView userView = new UserView();
 
-		System.out.println("Please enter your login credentials:");
+		System.out.println("Please enter your login credentials:\n");
 
 		String username = userView.getUsername();
 		String password = userView.getPassword();
@@ -59,13 +59,4 @@ public class UsersService
 		}
 
 	}
-
-	// public logare() // primesc 2 string uri din presentation, fac cv cu ele si cu
-	// DAO (requesturile de ID, daca exista etc)
-	// si returnez fie useru fie id-ul
-
-	/// service apeleaza la randu lui DAO,
-
-	/// din presentation nu folosesc direct DAO, tb sa trec prin service (adica
-	/// acesta)
 }

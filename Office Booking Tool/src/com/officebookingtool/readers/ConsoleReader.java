@@ -19,10 +19,12 @@ public class ConsoleReader
 		if (reader.validate(input))
 		{
 			System.out.println(reader.getSuccessfulMessage());
+			System.out.println();
 			return reader.getValue(input);
 		} else
 		{
 			System.out.println(reader.getErrorMessage());
+			System.out.println();
 			return read(reader);
 		}
 	}
