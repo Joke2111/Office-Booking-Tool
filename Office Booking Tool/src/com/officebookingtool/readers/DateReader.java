@@ -3,6 +3,12 @@ package com.officebookingtool.readers;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
+import com.officebookingtool.database.DatabaseUtils;
+
+/**
+ * 
+ * An implementation of the {@link InputReader} interface for reading and validating dates in the format "DD-MM-YYYY"
+ */
 public class DateReader implements InputReader<LocalDateTime>
 {
 	private static int daysInMonth(int month, int year)
@@ -38,7 +44,7 @@ public class DateReader implements InputReader<LocalDateTime>
 	@Override
 	public String getErrorMessage()
 	{
-		return "Invalid date! Make sure that the date is in the following format DD-MM-YYYY";
+		return "Invalid date! Make sure that the date is valid and is in the following format DD-MM-YYYY";
 	}
 
 	@Override
@@ -66,6 +72,13 @@ public class DateReader implements InputReader<LocalDateTime>
 		}
 
 		if (day > daysInMonth(month, year))
+		{
+			return false;
+		}
+		LocalDateTime inputDateTime = LocalDateTime.of(year, month, day, 23, 0, 0);
+		LocalDateTime currentDateTime = DatabaseUtils.getDbDateTime();
+
+		if (inputDateTime.isBefore(currentDateTime))
 		{
 			return false;
 		}

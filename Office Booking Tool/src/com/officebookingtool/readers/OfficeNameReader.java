@@ -1,5 +1,9 @@
 package com.officebookingtool.readers;
 
+/**
+ * 
+ * Implementation of the {@link InputReader} interface for reading an office name from the console.
+ */
 public class OfficeNameReader implements InputReader<String>
 {
 

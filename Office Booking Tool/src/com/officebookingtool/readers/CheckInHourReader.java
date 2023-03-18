@@ -3,6 +3,12 @@ package com.officebookingtool.readers;
 import java.time.LocalTime;
 import java.time.format.DateTimeParseException;
 
+import com.officebookingtool.database.DatabaseUtils;
+
+/**
+ * 
+ * An implementation of the {@link InputReader} interface for reading and validating LocalTime values representing check-in hours.
+ */
 public class CheckInHourReader implements InputReader<LocalTime>
 {
 
@@ -22,15 +28,23 @@ public class CheckInHourReader implements InputReader<LocalTime>
 	@Override
 	public boolean validate(String input)
 	{
+
 		try
 		{
+			LocalTime dbTime = DatabaseUtils.getDbTime();
 			LocalTime time = LocalTime.parse(input);
 			int hour = time.getHour();
 			int minute = time.getMinute();
+
 			if (hour < 8 || hour > 19 || minute != 0)
 			{
 				return false;
 			}
+			if (time.compareTo(dbTime) < 0)
+			{
+				return false;
+			}
+
 			return true;
 		} catch (DateTimeParseException e)
 		{

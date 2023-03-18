@@ -16,7 +16,7 @@ public class AddOfficeCommand implements Command
 
 			if (loggedInUser == null)
 			{
-				System.out.println("You have to be loged in to have acces to this command");
+				System.out.println("You have to be logged in to have access to this command");
 				return;
 			} else
 			{

@@ -13,8 +13,16 @@ import com.officebookingtool.database.OfficeDAO;
 import com.officebookingtool.presentation.BookingView;
 import com.officebookingtool.presentation.OfficeView;
 
+/**
+ * The OfficeService class contains methods to add an office, view available time intervals, view the formatted bookings, and view the office status.
+ */
 public class OfficeService
 {
+	/**
+	 * Adds a new office to the database.
+	 * 
+	 * @return The office that was added, or recursively calls the method if the addition fails.
+	 */
 	static public Office AddOffice()
 	{
 		String officeType = OfficeView.getOfficeType();
@@ -36,6 +44,11 @@ public class OfficeService
 		}
 	}
 
+	/**
+	 * Displays the available time intervals for a selected office and date.
+	 * 
+	 * @param bookings A list of SimpleEntry<Integer, Integer> objects representing booking start and end times.
+	 */
 	public static void displayAvailableTimeIntervals(List<SimpleEntry<Integer, Integer>> bookings)
 	{
 		boolean[] myArray = new boolean[12];
@@ -68,6 +81,9 @@ public class OfficeService
 		}
 	}
 
+	/**
+	 * Displays the status of the selected office meaning that the user can view the available time intervals.
+	 */
 	static public void ViewOfficeStatus()
 	{
 		String officeName = BookingService.SelectOffice().getOfficeName();
@@ -78,6 +94,11 @@ public class OfficeService
 
 	}
 
+	/**
+	 * Displays the formatted bookings for the logged-in user.
+	 * 
+	 * @param bookings A list of Reservation objects representing the user's bookings.
+	 */
 	public static void ViewFormatedBookings(List<Reservation> bookings)
 	{
 		if (bookings.size() == 0)

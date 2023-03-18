@@ -1,5 +1,11 @@
 package com.officebookingtool;
 
+/**
+
+The Office class represents an office with a name and a type.
+
+The class provides getters and setters for both the office name and type.
+*/
 public class Office
 {
 	private String officeName;

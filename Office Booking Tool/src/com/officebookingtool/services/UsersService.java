@@ -5,9 +5,16 @@ import com.officebookingtool.User;
 import com.officebookingtool.database.UserDAO;
 import com.officebookingtool.presentation.UserView;
 
+/**
+ * This class contains the methods for the login and registration of a user.
+ */
 public class UsersService
 {
-
+	/**
+	 * This method is used to log in a user
+	 *
+	 * @return The User object if the login is successful, or recursively calls itself if the login fails
+	 */
 	static public User Login()
 	{
 		UserView userView = new UserView();
@@ -32,6 +39,11 @@ public class UsersService
 		}
 	}
 
+	/**
+	 * This method is used to register a new user
+	 *
+	 * @return The User object if the registration is successful, or recursively calls itself if the registration fails
+	 */
 	static public User Register()
 	{
 		UserView userView = new UserView();

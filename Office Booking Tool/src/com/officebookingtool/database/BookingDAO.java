@@ -43,15 +43,16 @@ public class BookingDAO
 		}
 	}
 
-	private static final String SELECT_ALL_BOOKINGS_SQL = "SELECT * FROM booking";
+	private static final String SELECT_BOOKINGS_FROM_OFFICE_SQL = "SELECT user_id, office_id, check_in_date, check_out_date from booking WHERE office_id = ?;";
 
-	public static List<Booking> getAllExistingBookings()
+	public static List<Booking> getAllExistingBookings(int idOfCurrentOffice)
 	{
 		List<Booking> existingBookings = new ArrayList<>();
 
 		Connection connection = DatabaseConnector.getConnection();
-		try (PreparedStatement statement = connection.prepareStatement(SELECT_ALL_BOOKINGS_SQL))
+		try (PreparedStatement statement = connection.prepareStatement(SELECT_BOOKINGS_FROM_OFFICE_SQL))
 		{
+			statement.setInt(1, idOfCurrentOffice);
 			ResultSet resultSet = statement.executeQuery();
 
 			while (resultSet.next())

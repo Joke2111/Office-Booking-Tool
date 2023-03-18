@@ -16,7 +16,7 @@ public class RegisterCommand implements Command
 			context.setLoggedInUser(UsersService.Register());
 		} else
 		{
-			System.out.println("You are already loged!");
+			System.out.println("You are already logged!");
 		}
 	}
 

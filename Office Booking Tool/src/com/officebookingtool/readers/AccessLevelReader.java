@@ -1,5 +1,8 @@
 package com.officebookingtool.readers;
 
+/**
+ * An implementation of the {@link InputReader} interface for reading integer access levels.
+ */
 public class AccessLevelReader implements InputReader<Integer>
 {
 

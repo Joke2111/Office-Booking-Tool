@@ -12,9 +12,18 @@ import com.officebookingtool.database.*;
 import com.officebookingtool.presentation.BookingView;
 import com.officebookingtool.presentation.OfficeView;
 
+/**
+ * The BookingService class provides methods to add a booking and select an office for a user.
+ */
 public class BookingService
 {
 
+	/**
+	 * Adds a new booking for the given user.
+	 * 
+	 * @param user The user for whom the booking is being made.
+	 * @return The newly added booking, or null if the booking failed to be added.
+	 */
 	static public Booking AddBooking(User user)
 	{
 		System.out.println("Please enter your booking details:");
@@ -37,7 +46,9 @@ public class BookingService
 		LocalDateTime checkInDate = LocalDateTime.of(date.toLocalDate(), checkInHour);
 		LocalDateTime checkOutDate = LocalDateTime.of(date.toLocalDate(), checkOutHour);
 
-		List<Booking> existingBookings = BookingDAO.getAllExistingBookings();
+		int idOfCurrentOffice = OfficeDAO.findOfficeId(office);
+
+		List<Booking> existingBookings = BookingDAO.getAllExistingBookings(idOfCurrentOffice);
 
 		Booking booking;
 
@@ -46,7 +57,6 @@ public class BookingService
 			System.out.println("Details inserted successfully!");
 
 			int idOfCurrentUser = UserDAO.findUserId(user);
-			int idOfCurrentOffice = OfficeDAO.findOfficeId(office);
 
 			booking = new Booking(idOfCurrentUser, idOfCurrentOffice, checkInDate, checkOutDate);
 
@@ -71,6 +81,11 @@ public class BookingService
 
 	}
 
+	/**
+	 * Displays a list of all available offices and prompts the user to select one.
+	 * 
+	 * @return The office selected by the user.
+	 */
 	static public Office SelectOffice()
 	{
 		System.out.println("Here is a list with our offices (name & type):");

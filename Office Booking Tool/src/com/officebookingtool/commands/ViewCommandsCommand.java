@@ -13,6 +13,7 @@ public class ViewCommandsCommand implements Command
 		System.out.println("/makebook - Command used to make a new booking");
 		System.out.println("/officestatus - Command used to view available hours of an office on a specific day");
 		System.out.println("/mybookings - Command used to view all the bookings made by the current user");
+		System.out.println("/exit - Command used to exit the app");
 	}
 
 }

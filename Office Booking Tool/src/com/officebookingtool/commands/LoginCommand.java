@@ -16,7 +16,7 @@ public class LoginCommand implements Command
 			context.setLoggedInUser(UsersService.Login());
 		} else
 		{
-			System.out.println("You are already loged!");
+			System.out.println("You are already logged!");
 		}
 	}
 

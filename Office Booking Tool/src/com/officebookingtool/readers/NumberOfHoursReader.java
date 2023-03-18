@@ -1,5 +1,9 @@
 package com.officebookingtool.readers;
 
+/**
+ * 
+ * An implementation of the {@link InputReader} interface for reading and validating an integer representing the number of hours.
+ */
 public class NumberOfHoursReader implements InputReader<Integer>
 {
 
