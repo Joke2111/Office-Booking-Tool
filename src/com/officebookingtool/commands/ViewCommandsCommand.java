@@ -1,5 +1,11 @@
 package com.officebookingtool.commands;
 
+/**
+ * 
+ * This class represents a command to view the available commands in the application.
+ * 
+ * It implements the {@link Command} interface.
+ */
 public class ViewCommandsCommand implements Command
 {
 	@Override

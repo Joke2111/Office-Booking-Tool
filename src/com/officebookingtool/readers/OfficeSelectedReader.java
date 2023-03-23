@@ -2,6 +2,10 @@ package com.officebookingtool.readers;
 
 import com.officebookingtool.database.OfficeDAO;
 
+/**
+ * 
+ * Implementation of the {@link InputReader} interface for selecting an office from the console.
+ */
 public class OfficeSelectedReader implements InputReader<Integer>
 {
 

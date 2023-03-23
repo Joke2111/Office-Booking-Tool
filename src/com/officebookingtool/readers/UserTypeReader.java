@@ -3,6 +3,10 @@ package com.officebookingtool.readers;
 import java.util.Arrays;
 import java.util.List;
 
+/**
+ * 
+ * Implementation of the {@link InputReader} interface for reading the type of an user from the console.
+ */
 public class UserTypeReader implements InputReader<String>
 {
 

@@ -1,5 +1,9 @@
 package com.officebookingtool.readers;
 
+/**
+ * 
+ * Implementation of the {@link InputReader} interface for reading the password of an user from the console.
+ */
 public class PasswordReader implements InputReader<String>
 {
 

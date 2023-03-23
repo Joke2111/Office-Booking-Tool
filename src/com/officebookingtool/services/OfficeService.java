@@ -119,7 +119,7 @@ public class OfficeService
 				LocalDateTime checkOutTime = booking.getCheckOutDate();
 				String officeName = booking.getOfficeName();
 
-				String message = String.format("%d. %s %s to %s at the %s office", i + 1,
+				String message = String.format("%d. %s %s to %s at the %s Office", i + 1,
 						checkInTime.format(DateTimeFormatter.ofPattern("dd-MM-yyyy")),
 						checkInTime.format(DateTimeFormatter.ofPattern("HH:mm")), checkOutTime.format(DateTimeFormatter.ofPattern("HH:mm")),
 						officeName);

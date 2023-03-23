@@ -36,6 +36,12 @@ public class BookingService
 		return true;
 	}
 
+	/**
+	 * Checks if the company has any offices. If there are no offices, the method terminates the program if the logged-in user does not have admin access.
+	 * Otherwise, it prompts the user to add an office.
+	 * 
+	 * @return true if the company has at least one office, false otherwise
+	 */
 	static public boolean checkNumberOfOffices()
 	{
 		CommandContext context = CommandContext.getInstance();

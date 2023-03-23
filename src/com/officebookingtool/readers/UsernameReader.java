@@ -1,5 +1,9 @@
 package com.officebookingtool.readers;
 
+/**
+ * 
+ * Implementation of the {@link InputReader} interface for reading the username of an user from the console.
+ */
 public class UsernameReader implements InputReader<String>
 {
 

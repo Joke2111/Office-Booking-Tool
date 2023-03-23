@@ -3,6 +3,10 @@ package com.officebookingtool.readers;
 import java.util.Arrays;
 import java.util.List;
 
+/**
+ * 
+ * Implementation of the {@link InputReader} interface for reading an office type from the console.
+ */
 public class OfficeTypeReader implements InputReader<String>
 {
 
@@ -17,8 +21,7 @@ public class OfficeTypeReader implements InputReader<String>
 	@Override
 	public String getErrorMessage()
 	{
-		return "Invalid input. Please enter one of the following office types: "
-				+ String.join(", ", allowedOfficeTypes);
+		return "Invalid input. Please enter one of the following office types: " + String.join(", ", allowedOfficeTypes);
 	}
 
 	@Override

@@ -12,11 +12,23 @@ import com.officebookingtool.models.Booking;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * The BookingDAO class is responsible for accessing and manipulating bookings data in the database.
+ */
 public class BookingDAO
 {
-
+	/**
+	 * The SQL statement to insert a new booking into the database.
+	 */
 	private static final String INSERT_BOOKING_SQL = "INSERT INTO booking (user_id, office_id, check_in_date, check_out_date) VALUES (?, ?, ?, ?)";
 
+	/**
+	 * Adds a new booking to the database.
+	 * 
+	 * @param booking The booking to add to the database.
+	 * 
+	 * @return true if the booking was successfully added, false otherwise.
+	 */
 	public static boolean addBooking(Booking booking)
 	{
 
@@ -43,8 +55,20 @@ public class BookingDAO
 		}
 	}
 
+	/**
+	 * 
+	 * SQL query to retrieve all bookings for a specific office.
+	 */
 	private static final String SELECT_BOOKINGS_FROM_OFFICE_SQL = "SELECT user_id, office_id, check_in_date, check_out_date from booking WHERE office_id = ?;";
 
+	/**
+	 * 
+	 * Retrieves all existing bookings for a specific office.
+	 * 
+	 * @param idOfCurrentOffice the ID of the office for which to retrieve bookings
+	 * 
+	 * @return a list of all existing bookings for the specified office
+	 */
 	public static List<Booking> getAllExistingBookings(int idOfCurrentOffice)
 	{
 		List<Booking> existingBookings = new ArrayList<>();
@@ -86,10 +110,20 @@ public class BookingDAO
 		return existingBookings;
 	}
 
+	/**
+	 * The SQL query for retrieving the booked intervals for a given office on a given date.
+	 */
 	private static final String GET_BOOKED_INTERVALS_SQL = "SELECT HOUR(check_in_date), HOUR(check_out_date) " + "FROM booking "
 			+ "JOIN office ON booking.office_id = office.id " + "JOIN user ON booking.user_id = user.id " + "WHERE DATE(check_in_date) = ? "
 			+ "AND office.name = ?";
 
+	/**
+	 * Returns a list of booked intervals for a given office on a given date.
+	 *
+	 * @param date       the date for which to retrieve the bookings
+	 * @param officeName the name of the office for which to retrieve the bookings
+	 * @return the list of booked intervals for the given office and date
+	 */
 	public static List<SimpleEntry<Integer, Integer>> viewBookings(LocalDateTime date, String officeName)
 	{
 		List<SimpleEntry<Integer, Integer>> bookings = new ArrayList<>();
@@ -127,5 +161,4 @@ public class BookingDAO
 		}
 		return bookings;
 	}
-
 }

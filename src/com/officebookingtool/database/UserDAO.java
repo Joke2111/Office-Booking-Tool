@@ -7,10 +7,23 @@ import java.sql.SQLException;
 
 import com.officebookingtool.models.User;
 
+/**
+ * The UserDAO class is responsible for accessing and manipulating user data in the database.
+ */
 public class UserDAO
 {
+
+	/**
+	 * The SQL query used to insert a new user into the database.
+	 */
 	private static final String INSERT_USER_SQL = "INSERT INTO user (username, access_level, type, password) VALUES (?, ?, ?, ?)";
 
+	/**
+	 * Adds a new user to the database.
+	 *
+	 * @param user The user to add.
+	 * @return true if the user was successfully added, false otherwise.
+	 */
 	public static boolean addUser(User user)
 	{
 		Connection connection = DatabaseConnector.getConnection();
@@ -37,8 +50,17 @@ public class UserDAO
 
 	}
 
+	/**
+	 * The SQL query used to retrieve the ID of a user by their username.
+	 */
 	private static final String FIND_USER_ID_SQL = "SELECT id FROM user WHERE username = ?";
 
+	/**
+	 * Finds the ID of a user in the database by their username.
+	 *
+	 * @param user The user to find.
+	 * @return The ID of the user, or null if the user was not found.
+	 */
 	public static Integer findUserId(User user)
 	{
 		ResultSet rs = null;
@@ -73,8 +95,17 @@ public class UserDAO
 		}
 	}
 
+	/**
+	 * The SQL query used to retrieve a user from the database by their username.
+	 */
 	private static final String GET_USER_BY_USERNAME_SQL = "SELECT * FROM user WHERE username = ?";
 
+	/**
+	 * Retrieves a user from the database by their username.
+	 *
+	 * @param username The username of the user to retrieve.
+	 * @return The User object representing the user, or null if the user was not found.
+	 */
 	public static User getUserByUsername(String username)
 	{
 		ResultSet rs = null;
@@ -113,8 +144,20 @@ public class UserDAO
 		}
 	}
 
+	/**
+	 * 
+	 * SQL query for validating user login.
+	 */
 	private static final String LOGIN_SQL = "SELECT username FROM user WHERE username = ? AND password = ?";
 
+	/**
+	 * 
+	 * Validates user login by checking the credentials against the database.
+	 * 
+	 * @param username the username of the user
+	 * @param password the password of the user
+	 * @return true if the credentials are valid, false otherwise
+	 */
 	public static boolean validateLogin(String username, String password)
 	{
 		ResultSet rs = null;

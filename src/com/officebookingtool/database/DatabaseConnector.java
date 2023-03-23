@@ -7,11 +7,27 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.Properties;
 
+/**
+ * The DatabaseConnector class provides a utility for creating and obtaining a connection to a MySQL database.
+ */
 public class DatabaseConnector
 {
+
+	/**
+	 * The connection object for the MySQL database.
+	 */
 	private static Connection connection;
+
+	/**
+	 * The properties object for the MySQL database connection.
+	 */
 	private static Properties props;
 
+	/**
+	 * A static initializer block that loads the MySQL JDBC driver and reads the database properties file.
+	 *
+	 * @throws RuntimeException if the JDBC driver cannot be loaded or the database properties file cannot be read.
+	 */
 	static
 	{
 		try
@@ -29,6 +45,12 @@ public class DatabaseConnector
 		}
 	}
 
+	/**
+	 * Returns a connection to the MySQL database.
+	 *
+	 * @return the connection to the MySQL database
+	 * @throws RuntimeException if the connection cannot be established
+	 */
 	public static Connection getConnection()
 	{
 		try

@@ -9,9 +9,9 @@ import com.officebookingtool.commands.CommandFactory;
 import com.officebookingtool.database.*;
 
 /**
- * The OfficeBookingTool class is responsible for running the Office Booking Tool application. It provides the main method to start the application,
- * which includes setting up the CommandExecutor and listening to user input from the command line. When the user exits the application, it closes the
- * database connection.
+ * The {@code OfficeBookingTool} class is responsible for running the Office Booking Tool application. It provides the main method to start the
+ * application, which includes setting up the CommandExecutor and listening to user input from the command line. When the user exits the application,
+ * it closes the database connection.
  */
 public class OfficeBookingTool
 {
