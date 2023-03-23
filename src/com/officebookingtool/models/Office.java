@@ -1,4 +1,4 @@
-package com.officebookingtool;
+package com.officebookingtool.models;
 
 /**
 

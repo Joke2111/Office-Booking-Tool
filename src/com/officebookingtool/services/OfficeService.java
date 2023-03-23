@@ -6,10 +6,10 @@ import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.AbstractMap.SimpleEntry;
 
-import com.officebookingtool.Office;
-import com.officebookingtool.Reservation;
 import com.officebookingtool.database.BookingDAO;
 import com.officebookingtool.database.OfficeDAO;
+import com.officebookingtool.models.Office;
+import com.officebookingtool.models.Reservation;
 import com.officebookingtool.presentation.BookingView;
 import com.officebookingtool.presentation.OfficeView;
 
@@ -23,7 +23,7 @@ public class OfficeService
 	 * 
 	 * @return The office that was added, or recursively calls the method if the addition fails.
 	 */
-	static public Office AddOffice()
+	static public Office addOffice()
 	{
 		String officeType = OfficeView.getOfficeType();
 		String officeName = OfficeView.getOfficeName();
@@ -39,8 +39,7 @@ public class OfficeService
 		} else
 		{
 			System.out.println("Office addition failed");
-			/// restructurat return-ul !!!
-			return AddOffice();
+			return null;
 		}
 	}
 
@@ -84,9 +83,14 @@ public class OfficeService
 	/**
 	 * Displays the status of the selected office meaning that the user can view the available time intervals.
 	 */
-	static public void ViewOfficeStatus()
+	static public void viewOfficeStatus()
 	{
-		String officeName = BookingService.SelectOffice().getOfficeName();
+		Office selectedOffice = BookingService.selectOffice();
+		if (selectedOffice == null)
+		{
+			return;
+		}
+		String officeName = selectedOffice.getOfficeName();
 		LocalDateTime date = BookingView.getDate();
 		List<SimpleEntry<Integer, Integer>> bookings = BookingDAO.viewBookings(date, officeName);
 
@@ -99,7 +103,7 @@ public class OfficeService
 	 * 
 	 * @param bookings A list of Reservation objects representing the user's bookings.
 	 */
-	public static void ViewFormatedBookings(List<Reservation> bookings)
+	public static void viewFormatedBookings(List<Reservation> bookings)
 	{
 		if (bookings.size() == 0)
 		{

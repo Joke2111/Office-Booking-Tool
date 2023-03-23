@@ -1,9 +1,9 @@
-package com.officebookingtool;
+package com.officebookingtool.models;
 
 import java.time.LocalDateTime;
 
 /**
- * The Reservation class represents a booking only with checkInDate, checkOutDate and officeName. It is used for displaying the bookings of a user.
+ * The Reservation class represents a booking only with checkInDate, checkOutDate and additionally officeName. It is used for displaying the bookings of a user.
  */
 public class Reservation
 {

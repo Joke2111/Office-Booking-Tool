@@ -6,10 +6,11 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDateTime;
 import java.util.AbstractMap.SimpleEntry;
+
+import com.officebookingtool.models.Booking;
+
 import java.util.ArrayList;
 import java.util.List;
-
-import com.officebookingtool.Booking;
 
 public class BookingDAO
 {
@@ -28,7 +29,6 @@ public class BookingDAO
 			statement.setObject(3, booking.getCheckInDate());
 			statement.setObject(4, booking.getCheckOutDate());
 
-			// Execute the prepared statement
 			int rowsInserted = statement.executeUpdate();
 
 			if (rowsInserted > 0)
@@ -49,11 +49,13 @@ public class BookingDAO
 	{
 		List<Booking> existingBookings = new ArrayList<>();
 
+		ResultSet resultSet = null;
+
 		Connection connection = DatabaseConnector.getConnection();
 		try (PreparedStatement statement = connection.prepareStatement(SELECT_BOOKINGS_FROM_OFFICE_SQL))
 		{
 			statement.setInt(1, idOfCurrentOffice);
-			ResultSet resultSet = statement.executeQuery();
+			resultSet = statement.executeQuery();
 
 			while (resultSet.next())
 			{
@@ -69,6 +71,16 @@ public class BookingDAO
 		} catch (SQLException e)
 		{
 			e.printStackTrace();
+		} finally
+		{
+			if (resultSet != null)
+				try
+				{
+					resultSet.close();
+				} catch (SQLException e)
+				{
+					e.printStackTrace();
+				}
 		}
 
 		return existingBookings;
@@ -82,6 +94,8 @@ public class BookingDAO
 	{
 		List<SimpleEntry<Integer, Integer>> bookings = new ArrayList<>();
 
+		ResultSet rs = null;
+
 		Connection connection = DatabaseConnector.getConnection();
 		try (PreparedStatement stmt = connection.prepareStatement(GET_BOOKED_INTERVALS_SQL))
 		{
@@ -89,7 +103,7 @@ public class BookingDAO
 			stmt.setDate(1, java.sql.Date.valueOf(date.toLocalDate()));
 			stmt.setString(2, officeName);
 
-			ResultSet rs = stmt.executeQuery();
+			rs = stmt.executeQuery();
 			while (rs.next())
 			{
 				int checkInDate = rs.getInt(1);
@@ -100,7 +114,16 @@ public class BookingDAO
 		} catch (SQLException e)
 		{
 			System.out.println(e.getMessage());
-			System.out.println("ai intrat pe catch");
+		} finally
+		{
+			if (rs != null)
+				try
+				{
+					rs.close();
+				} catch (SQLException e)
+				{
+					e.printStackTrace();
+				}
 		}
 		return bookings;
 	}

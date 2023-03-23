@@ -8,9 +8,9 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.officebookingtool.Office;
-import com.officebookingtool.Reservation;
-import com.officebookingtool.User;
+import com.officebookingtool.models.Office;
+import com.officebookingtool.models.Reservation;
+import com.officebookingtool.models.User;
 
 public class OfficeDAO
 {
@@ -45,23 +45,33 @@ public class OfficeDAO
 
 	public static Integer findOfficeId(Office office)
 	{
+		ResultSet rs = null;
+
 		Connection connection = DatabaseConnector.getConnection();
 		try (PreparedStatement statement = connection.prepareStatement(FIND_OFFICE_ID_SQL))
 		{
 			statement.setString(1, office.getOfficeName());
 
-			ResultSet rs = statement.executeQuery();
+			rs = statement.executeQuery();
 			if (rs.next())
 			{
 				return rs.getInt("id");
-			} else
-			{
-				return null;
 			}
 		} catch (SQLException e)
 		{
 			System.out.println(e.getMessage());
+		} finally
+		{
+			if (rs != null)
+				try
+				{
+					rs.close();
+				} catch (SQLException e)
+				{
+					e.printStackTrace();
+				}
 		}
+
 		return null;
 	}
 
@@ -71,10 +81,12 @@ public class OfficeDAO
 	{
 		List<Office> offices = new ArrayList<>();
 
+		ResultSet resultSet = null;
+
 		Connection connection = DatabaseConnector.getConnection();
 		try (PreparedStatement statement = connection.prepareStatement(SELECT_ALL_OFFICES_SQL))
 		{
-			ResultSet resultSet = statement.executeQuery();
+			resultSet = statement.executeQuery();
 
 			while (resultSet.next())
 			{
@@ -87,6 +99,16 @@ public class OfficeDAO
 		} catch (SQLException e)
 		{
 			e.printStackTrace();
+		} finally
+		{
+			if (resultSet != null)
+				try
+				{
+					resultSet.close();
+				} catch (SQLException e)
+				{
+					e.printStackTrace();
+				}
 		}
 
 		return offices;
@@ -96,10 +118,13 @@ public class OfficeDAO
 
 	public static Integer getNumberOfOffices()
 	{
+		ResultSet rs = null;
+
 		Connection connection = DatabaseConnector.getConnection();
 		try (PreparedStatement statement = connection.prepareStatement(SELECT_NUMBER_OF_OFFICES_SQL))
 		{
-			ResultSet rs = statement.executeQuery();
+			rs = statement.executeQuery();
+
 			if (rs.next())
 			{
 				return rs.getInt(1);
@@ -110,7 +135,18 @@ public class OfficeDAO
 		} catch (SQLException e)
 		{
 			System.out.println(e.getMessage());
+		} finally
+		{
+			if (rs != null)
+				try
+				{
+					rs.close();
+				} catch (SQLException e)
+				{
+					e.printStackTrace();
+				}
 		}
+
 		return null;
 	}
 
@@ -118,12 +154,15 @@ public class OfficeDAO
 
 	public static Office getOfficeById(Integer officeNumber)
 	{
+		ResultSet rs = null;
+
 		Connection connection = DatabaseConnector.getConnection();
 		try (PreparedStatement statement = connection.prepareStatement(GET_OFFICE_BY_ID_SQL))
 		{
 			statement.setInt(1, officeNumber);
 
-			ResultSet rs = statement.executeQuery();
+			rs = statement.executeQuery();
+
 			if (rs.next())
 			{
 				String name = rs.getString("name");
@@ -138,8 +177,18 @@ public class OfficeDAO
 			}
 		} catch (SQLException e)
 		{
-			/// de ce mai tb sa arat exceptia cand eu dau return si practic o tratez in service
+			System.out.println(e.getMessage());
 			return null;
+		} finally
+		{
+			if (rs != null)
+				try
+				{
+					rs.close();
+				} catch (SQLException e)
+				{
+					e.printStackTrace();
+				}
 		}
 	}
 
@@ -151,11 +200,13 @@ public class OfficeDAO
 	{
 		List<Reservation> bookings = new ArrayList<>();
 
+		ResultSet rs = null;
+
 		Connection connection = DatabaseConnector.getConnection();
 		try (PreparedStatement stmt = connection.prepareStatement(SELECT_REZERVATIONS_SQL))
 		{
 			stmt.setString(1, user.getUsername());
-			ResultSet rs = stmt.executeQuery();
+			rs = stmt.executeQuery();
 
 			while (rs.next())
 			{
@@ -167,6 +218,16 @@ public class OfficeDAO
 		} catch (SQLException e)
 		{
 			e.printStackTrace();
+		} finally
+		{
+			if (rs != null)
+				try
+				{
+					rs.close();
+				} catch (SQLException e)
+				{
+					e.printStackTrace();
+				}
 		}
 		return bookings;
 	}

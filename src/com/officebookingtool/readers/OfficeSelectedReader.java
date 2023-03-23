@@ -21,12 +21,6 @@ public class OfficeSelectedReader implements InputReader<Integer>
 	public boolean validate(String input)
 	{
 		Integer numberOfOffices = OfficeDAO.getNumberOfOffices();
-		if (numberOfOffices == null || numberOfOffices == 0)
-		{
-			System.out.println("The company has no office at this moment. Please contact someone who can add offices!");
-			System.out.println("Exiting program...");
-			System.exit(0); // terminate the program
-		}
 		try
 		{
 			int value = Integer.parseInt(input); // Parse the input String to an int value

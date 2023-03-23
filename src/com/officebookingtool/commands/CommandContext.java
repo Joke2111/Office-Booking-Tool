@@ -1,6 +1,6 @@
 package com.officebookingtool.commands;
 
-import com.officebookingtool.User;
+import com.officebookingtool.models.User;
 
 public class CommandContext
 {

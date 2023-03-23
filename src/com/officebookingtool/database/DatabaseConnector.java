@@ -1,39 +1,45 @@
 package com.officebookingtool.database;
 
+import java.io.IOException;
+import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.util.Properties;
 
 public class DatabaseConnector
 {
 	private static Connection connection;
+	private static Properties props;
 
 	static
 	{
 		try
 		{
 			Class.forName("com.mysql.cj.jdbc.Driver");
+			props = new Properties();
+			InputStream input = DatabaseConnector.class.getResourceAsStream("/resources/database.properties");
+			props.load(input);
 		} catch (ClassNotFoundException e)
 		{
 			throw new RuntimeException("Could not load JDBC driver", e);
+		} catch (IOException e)
+		{
+			throw new RuntimeException("Could not read database properties file", e);
 		}
 	}
-
-	private static final String DATABASE_URL = "jdbc:mysql://localhost:3307/officebookingtool";
-	private static final String DATABASE_USER = "root";
-	private static final String DATABASE_PASSWORD = "joke2111";
 
 	public static Connection getConnection()
 	{
 		try
 		{
 			if (connection == null)
-				connection = DriverManager.getConnection(DATABASE_URL, DATABASE_USER, DATABASE_PASSWORD);
+				connection = DriverManager.getConnection(props.getProperty("database_url"), props.getProperty("database_user"),
+						props.getProperty("database_password"));
 			return connection;
 		} catch (SQLException e)
 		{
 			throw new RuntimeException(e);
 		}
-
 	}
 }

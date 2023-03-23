@@ -1,4 +1,4 @@
-package com.officebookingtool;
+package com.officebookingtool.models;
 
 /**
  * The User class represents a user of the system.

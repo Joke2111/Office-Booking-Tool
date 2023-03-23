@@ -5,7 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import com.officebookingtool.User;
+import com.officebookingtool.models.User;
 
 public class UserDAO
 {
@@ -41,12 +41,14 @@ public class UserDAO
 
 	public static Integer findUserId(User user)
 	{
+		ResultSet rs = null;
+
 		Connection connection = DatabaseConnector.getConnection();
 		try (PreparedStatement statement = connection.prepareStatement(FIND_USER_ID_SQL))
 		{
 			statement.setString(1, user.getUsername());
 
-			ResultSet rs = statement.executeQuery();
+			rs = statement.executeQuery();
 			if (rs.next())
 			{
 				return rs.getInt("id");
@@ -56,22 +58,33 @@ public class UserDAO
 			}
 		} catch (SQLException e)
 		{
-			/// Nu ma intereseaza aici ca nu poti ajunge sa faci rezervare daca nu esti logat
 			System.out.println(e.getMessage());
+			return null;
+		} finally
+		{
+			if (rs != null)
+				try
+				{
+					rs.close();
+				} catch (SQLException e)
+				{
+					e.printStackTrace();
+				}
 		}
-		return null;
 	}
 
 	private static final String GET_USER_BY_USERNAME_SQL = "SELECT * FROM user WHERE username = ?";
 
 	public static User getUserByUsername(String username)
 	{
+		ResultSet rs = null;
+
 		Connection connection = DatabaseConnector.getConnection();
 		try (PreparedStatement statement = connection.prepareStatement(GET_USER_BY_USERNAME_SQL))
 		{
 			statement.setString(1, username);
 
-			ResultSet rs = statement.executeQuery();
+			rs = statement.executeQuery();
 			if (rs.next())
 			{
 				int accessLevel = rs.getInt("access_level");
@@ -85,8 +98,18 @@ public class UserDAO
 			}
 		} catch (SQLException e)
 		{
-			/// de ce mai tb sa arat exceptia cand eu dau return si practic o tratez in service
+			System.out.println(e.getMessage());
 			return null;
+		} finally
+		{
+			if (rs != null)
+				try
+				{
+					rs.close();
+				} catch (SQLException e)
+				{
+					e.printStackTrace();
+				}
 		}
 	}
 
@@ -94,6 +117,7 @@ public class UserDAO
 
 	public static boolean validateLogin(String username, String password)
 	{
+		ResultSet rs = null;
 
 		Connection connection = DatabaseConnector.getConnection();
 		try (PreparedStatement statement = connection.prepareStatement(LOGIN_SQL))
@@ -101,7 +125,7 @@ public class UserDAO
 			statement.setString(1, username);
 			statement.setString(2, password);
 
-			ResultSet rs = statement.executeQuery();
+			rs = statement.executeQuery();
 
 			if (rs.next())
 			{
@@ -113,6 +137,16 @@ public class UserDAO
 		} catch (SQLException e)
 		{
 			return false;
+		} finally
+		{
+			if (rs != null)
+				try
+				{
+					rs.close();
+				} catch (SQLException e)
+				{
+					e.printStackTrace();
+				}
 		}
 	}
 

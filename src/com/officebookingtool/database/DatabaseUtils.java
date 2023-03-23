@@ -29,7 +29,6 @@ public class DatabaseUtils
 			}
 		} catch (SQLException e)
 		{
-			/// de ce mai tb sa arat exceptia cand eu dau return si practic o tratez in service
 			return null;
 		}
 	}

@@ -1,11 +1,11 @@
 package com.officebookingtool.commands;
 
-import com.officebookingtool.User;
+import com.officebookingtool.models.User;
 import com.officebookingtool.services.OfficeService;
 
 public class AddOfficeCommand implements Command
 {
-	protected static final int ADMIN_ACCESS_LEVEL = 5;
+	public static final int ADMIN_ACCESS_LEVEL = 5;
 
 	@Override
 	public void execute()
@@ -14,20 +14,13 @@ public class AddOfficeCommand implements Command
 			CommandContext context = CommandContext.getInstance();
 			User loggedInUser = context.getLoggedInUser();
 
-			if (loggedInUser == null)
+			int loggedUserAccessLevel = loggedInUser.getAccessLevel();
+			if (loggedUserAccessLevel == ADMIN_ACCESS_LEVEL)
 			{
-				System.out.println("You have to be logged in to have access to this command");
-				return;
+				OfficeService.addOffice();
 			} else
 			{
-				int loggedUserAccessLevel = loggedInUser.getAccessLevel();
-				if (loggedUserAccessLevel == ADMIN_ACCESS_LEVEL)
-				{
-					OfficeService.AddOffice();
-				} else
-				{
-					System.out.println("You don't have the required access level to use this command!");
-				}
+				System.out.println("You don't have the required access level to use this command!");
 			}
 
 		}
